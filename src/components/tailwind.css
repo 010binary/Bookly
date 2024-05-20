@@ -1,0 +1,10 @@
+div {
+border-top-left-radius: 15;
+border-top-right-radius: 15;
+}
+
+button{
+    padding: 15px 10px;
+    background-color: blue;
+    color: white;
+}
