@@ -16,7 +16,7 @@ const LandingPage = () => {
           <p className="font-bold text-lg px-14">
             challenge yourself to read more this year!
           </p>
-          <a href="/">
+          <a href="/home">
             <button className="px-16 py-4 text-lg capitalize font-bold mt-5 bg-primary text-white hover:bg-white hover:text-black focus:text-black transition duration-200 ease-in-out">
               let's get started
             </button>
