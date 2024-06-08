@@ -18,34 +18,56 @@ import Link from "next/link";
 
 const Navbar: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [popup, setPopup] = useState({ show: false, message: "" });
 
   const handleToggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  const handleCloseSidebar = () => {
-    setIsSidebarOpen(false);
+  const handlePopup = (message: string) => {
+    setPopup({ show: true, message });
+  };
+
+  const closePopup = () => {
+    setPopup({ show: false, message: "" });
   };
 
   return (
     <>
-      <nav className=" relative pt-10 px-6 flex justify-between">
+      <nav className="relative pt-10 px-6 pb-2 flex justify-between">
         <button
           onClick={handleToggleSidebar}
           aria-controls="separator-sidebar"
           type="button"
           className="inline-flex items-center ms-3 text-sm cursor-pointer text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
         >
-          <span className="sr-only">Open sidebar</span>
-          <Image src={OpenNav} alt="Open Nav" width={20} height={20} />
+          <span className="sr-only">
+            {isSidebarOpen ? "Close sidebar" : "Open sidebar"}
+          </span>
+          <Image
+            src={isSidebarOpen ? CloseNav : OpenNav}
+            alt={isSidebarOpen ? "Close Nav" : "Open Nav"}
+            width={20}
+            height={20}
+          />
         </button>
 
         <div>
-          <button className="mr-4 cursor-pointer">
+          <button
+            className="mr-4 cursor-pointer"
+            onClick={() =>
+              handlePopup("This feature is currently not available")
+            }
+          >
             <span className="sr-only">Search Icon</span>
             <Image src={SearchIcon} alt="search Icon" width={25} height={25} />
           </button>
-          <button className="cursor-pointer">
+          <button
+            className="cursor-pointer"
+            onClick={() =>
+              handlePopup("This feature is currently not available")
+            }
+          >
             <span className="sr-only">Notification Icon</span>
             <Image
               src={Notification}
@@ -57,44 +79,29 @@ const Navbar: React.FC = () => {
         </div>
       </nav>
 
+      {popup.show && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white p-8 rounded shadow-lg relative">
+            <button
+              onClick={closePopup}
+              className="absolute top-0 right-2 text-red-600 text-2xl"
+            >
+              <span className="sr-only">Close</span>
+              &times;
+            </button>
+            <p className="mb-4">{popup.message}</p>
+          </div>
+        </div>
+      )}
+
       <aside
         id="separator-sidebar"
-        className={`fixed top-0 left-0 z-40 w-full h-screen transition-transform ${
+        className={`fixed top-[4.8rem] left-0 z-40 w-full h-[calc(100vh-4rem)] transition-transform ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } bg-gray-50 text-black`}
+        } bg-white text-black`}
         aria-label="Sidebar"
       >
         <div className="h-full px-3 py-4 overflow-y-auto">
-          <div className="flex justify-between items-center my-4">
-            <button
-              onClick={handleCloseSidebar}
-              type="button"
-              className="text-gray-900 bg-transparent hover:bg-gray-200 rounded-lg text-sm p-1.5 mr-auto inline-flex items-center dark:text-white dark:hover:bg-gray-600 dark:hover:text-white"
-            >
-              <Image src={CloseNav} alt="Close Nav" width={25} height={25} />
-              <span className="sr-only">Close menu</span>
-            </button>
-            <div>
-              <button className="mr-4">
-                <span className="sr-only">Search Icon</span>
-                <Image
-                  src={SearchIcon}
-                  alt="search Icon"
-                  width={25}
-                  height={25}
-                />
-              </button>
-              <button>
-                <span className="sr-only">Notification Icon</span>
-                <Image
-                  src={Notification}
-                  alt="Notification Icon"
-                  width={25}
-                  height={25}
-                />
-              </button>
-            </div>
-          </div>
           <div className="bg-gray-400 flex p-3 my-10">
             <span className="h-full">
               <Image src={Avatar} alt="Avatar icon" className="h-full" />
