@@ -51,7 +51,7 @@ const Navbar: React.FC = () => {
             height={20}
           />
         </button>
-
+        <h1 className="capitalize font-extrabold text-2xl text-blue-700">bookly</h1>
         <div>
           <button
             className="mr-4 cursor-pointer"
