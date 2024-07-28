@@ -32,7 +32,7 @@ const Discover: React.FC = () => {
             </p>
           </div>
         </section>
-        <section className="flex flex-col items-center justify-between bg-slate-400 p-4">
+        <section className="flex flex-col items-center justify-between bg-slate-400 p-10">
           <Image src={Book1} alt="bg-image" />
           <h2>Book Title</h2>
           <p>Book Author</p>
